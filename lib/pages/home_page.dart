@@ -1,10 +1,12 @@
 import 'package:fluttah/ability_list_item.dart';
 import 'package:fluttah/ability_list_view.dart';
+import 'package:fluttah/health_bar.dart';
 import 'package:fluttah/pages/add_ability_page.dart';
 import 'package:fluttah/riverpod/ability_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../main.dart';
+import '../riverpod/health_bar_notifier.dart';
 
 class HomePage extends ConsumerStatefulWidget {
   HomePage({super.key});
@@ -57,15 +59,17 @@ class _HomePageState extends ConsumerState<HomePage> {
               title: const Text('Long Rest'),
               onTap: () {
                 ref.read(abilityNotifierProvider.notifier).resetAbilities(ResetType.LongRest);
+                ref.read(healthbarNotifier.notifier).resetHealth();
                 Navigator.pop(context);
               },
             ),
           ],
         )),
-        body: AbilityListView(),
+        body: const AbilityListView(),
         floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
+          shape: const CircleBorder(),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AddAbilityPage()));

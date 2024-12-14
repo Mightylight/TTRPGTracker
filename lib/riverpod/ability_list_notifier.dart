@@ -72,7 +72,7 @@ class Ability {
 
   Ability.fromJson(Map<String, dynamic> json) :
     name = json['name'],
-    resetType = ResetType.values.firstWhere((e) => e.toString().split('.').last == json['resetType']),
+        resetType = ResetType.values.firstWhere((e) => e.toString().split('.').last == json['resetType']),
     maxUses = json['maxUses'],
     currentUses = json['currentUses'];
 

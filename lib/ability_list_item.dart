@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:fluttah/riverpod/ability_list_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,7 +33,6 @@ class _AbilityListItemState extends ConsumerState<AbilityListItem> {
     }
   }
 
-
   @override
   void initState() {
     steps = List.generate(widget.maxUses, (index) => false);
@@ -47,23 +44,25 @@ class _AbilityListItemState extends ConsumerState<AbilityListItem> {
     List<Ability> abilityList = ref.watch(abilityNotifierProvider);
     uses = abilityList[widget.index].currentUses;
     for (int i = 0; i < uses; i++) {
-      steps[i] = true;
+      if(i < steps.length){
+        steps[i] = true;
+      }
     }
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Slidable(
         endActionPane: ActionPane(
-            motion: ScrollMotion(),
+            motion: const ScrollMotion(),
             children: [SlidableAction(
               backgroundColor: Colors.red,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               onPressed: (BuildContext context){
                 ref.read(abilityNotifierProvider.notifier).removeAbility(widget.index);
               },
               icon: Icons.delete,
             ),SlidableAction(
               backgroundColor: Colors.blue,
-              borderRadius: BorderRadius.all(Radius.circular(15)),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
               onPressed: (BuildContext context){
                 //WIP, be able to edit the current widget
               },
@@ -86,6 +85,7 @@ class _AbilityListItemState extends ConsumerState<AbilityListItem> {
                     child: Text(
                       widget.abilityName,
                       style: const TextStyle(color: Colors.black, fontSize: 18),
+                      textAlign: TextAlign.justify,
                     ),
                   ),
                   Expanded(
