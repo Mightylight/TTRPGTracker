@@ -16,6 +16,7 @@ class AbilityListView extends ConsumerWidget {
           return AbilityListItem(
             abilityName: abilityList[index].name,
             maxUses: abilityList[index].maxUses,
+            index: index,
           );
         });
   }
